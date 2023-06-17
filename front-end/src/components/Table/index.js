@@ -19,6 +19,9 @@ import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 import ModalDetails from '../Modal/modalDetails'
+import ModalDelete from '../Modal/modalDelete'
+
+import { toast } from 'react-toastify'
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0)
@@ -26,6 +29,7 @@ export default function StickyHeadTable() {
   const [livros, setLivros] = useState([])
 
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisibleDelete, setIsModalVisibleDelete] = useState(false)
 
   const [selectedBook, setSelectedBook] = useState(null)
 
@@ -51,12 +55,41 @@ export default function StickyHeadTable() {
     fetchData()
   }, [])
 
-  function handleDelete(row) {}
-  // function handleView(row) {}
+  async function deletarLivro(id) {
+    try {
+      await axios.delete(`http://localhost:8000/livros/${id}`)
+
+      toast.success(`O Livro foi excluído!`, {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
+
+      const updatedLivros = livros.filter((livro) => livro._id !== id)
+      setLivros(updatedLivros)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function handleDelete() {
+    deletarLivro(selectedBook.id)
+    setIsModalVisibleDelete(false)
+  }
 
   function openModal(livro) {
     setSelectedBook(livro)
     setIsModalVisible(true)
+  }
+
+  function openModalDelete(livro) {
+    setSelectedBook(livro)
+    setIsModalVisibleDelete(true)
   }
 
   const rows = livros.map((livro) => ({
@@ -92,10 +125,23 @@ export default function StickyHeadTable() {
             />
           ) : null}
 
-          <button onClick={() => handleDelete(row)} className="config-delete">
+          <button
+            onClick={() => openModalDelete(row)}
+            className="config-delete"
+          >
             <DeleteForeverRoundedIcon fontSize="small" />
             Remover
           </button>
+
+          {isModalVisibleDelete ? (
+            <ModalDelete
+              onClose={() => {
+                setSelectedBook(null)
+                setIsModalVisibleDelete(false)
+              }}
+              handleDelete={handleDelete}
+            />
+          ) : null}
         </Acoes>
       ),
     },
@@ -146,14 +192,9 @@ export default function StickyHeadTable() {
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
+                .map((row, index) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                       {columns.map((column) => {
                         return (
                           <TableCell
