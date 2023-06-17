@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -17,9 +17,12 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
 
 import { useNavigate } from 'react-router-dom'
 
+import axios from 'axios'
+
 export default function StickyHeadTable() {
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [livros, setLivros] = useState([])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -31,6 +34,28 @@ export default function StickyHeadTable() {
   }
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        'http://localhost:8000/livros?_sort=dataCriacao&_order=desc',
+      )
+      const data = response.data
+      setLivros(data.reverse())
+    }
+    fetchData()
+  }, [])
+
+  function handleDelete(row) {}
+  function handleView(row) {}
+
+  const rows = livros.map((livro) => ({
+    id: livro._id,
+    titulo: livro.titulo,
+    autor: livro.autor,
+    descricao: livro.descricao,
+    acoes: '',
+  }))
 
   const columns = [
     { id: 'titulo', label: 'Titulo', minWidth: 170, align: 'center' },
@@ -52,27 +77,6 @@ export default function StickyHeadTable() {
           </button>
         </Acoes>
       ),
-    },
-  ]
-
-  function handleDelete(row) {}
-  function handleView(row) {}
-
-  const rows = [
-    {
-      titulo: 'Livro 1',
-      autor: 'Nome Autor 1',
-      acoes: '',
-    },
-    {
-      titulo: 'Livro 2',
-      autor: 'Nome Autor 2',
-      acoes: '',
-    },
-    {
-      titulo: 'Livro 3',
-      autor: 'Nome Autor 3',
-      acoes: '',
     },
   ]
 
@@ -130,16 +134,12 @@ export default function StickyHeadTable() {
                       key={row.code}
                     >
                       {columns.map((column) => {
-                        // const value = row[column.id]
                         return (
                           <TableCell
                             sx={{ color: '#fff' }}
                             key={column.id}
                             align={column.align}
                           >
-                            {/* {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value} */}
                             {column.format
                               ? column.format(row[column.id], row)
                               : row[column.id]}

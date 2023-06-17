@@ -104,6 +104,27 @@ export const Form = styled.form`
       background-color: #0e870b;
     }
   }
+
+  .loader {
+    display: flex;
+    align-items: center;
+  }
+
+  .loader-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    border-top-color: #fff;
+    animation: loader-spin 1s linear infinite;
+    margin-right: 8px;
+  }
+
+  @keyframes loader-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `
 
 export const Label = styled.label`
