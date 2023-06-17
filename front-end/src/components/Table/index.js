@@ -18,11 +18,16 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded'
 import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
+import ModalDetails from '../Modal/modalDetails'
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [livros, setLivros] = useState([])
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const [selectedBook, setSelectedBook] = useState(null)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -47,7 +52,12 @@ export default function StickyHeadTable() {
   }, [])
 
   function handleDelete(row) {}
-  function handleView(row) {}
+  // function handleView(row) {}
+
+  function openModal(livro) {
+    setSelectedBook(livro)
+    setIsModalVisible(true)
+  }
 
   const rows = livros.map((livro) => ({
     id: livro._id,
@@ -67,10 +77,21 @@ export default function StickyHeadTable() {
       align: 'center',
       format: (value, row) => (
         <Acoes>
-          <button onClick={() => handleView(row)} className="config-view">
+          <button onClick={() => openModal(row)} className="config-view">
             <ZoomInRoundedIcon fontSize="small" />
             Detalhes
           </button>
+
+          {isModalVisible ? (
+            <ModalDetails
+              onClose={() => {
+                setSelectedBook(null)
+                setIsModalVisible(false)
+              }}
+              livro={selectedBook}
+            />
+          ) : null}
+
           <button onClick={() => handleDelete(row)} className="config-delete">
             <DeleteForeverRoundedIcon fontSize="small" />
             Remover
