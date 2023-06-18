@@ -95,3 +95,21 @@ Front-end:
 - react-router-dom
 - axios
 
+##
+
+### Telas
+
+Home:
+![home](https://github.com/BrunoMonteiro25/genesis-bank/assets/98993736/68e0f77b-b820-402f-abe9-ec3291a6090a)
+
+Cadastrar Livros:
+![novo-livro](https://github.com/BrunoMonteiro25/genesis-bank/assets/98993736/11fe8b9b-d935-4811-8d28-a0c4431f8613)
+
+Home com a lista atualizada:
+![lista-atualizada](https://github.com/BrunoMonteiro25/genesis-bank/assets/98993736/4555c62f-23c6-4dc6-b0c9-16f034b6bd0d)
+
+Modal que exibe os detalhes do livro:
+![modal-detalhes](https://github.com/BrunoMonteiro25/genesis-bank/assets/98993736/86fe269e-76f6-440c-a88b-44fb8bdd5af7)
+
+Modal para apagar um livro:
+![modal-delete](https://github.com/BrunoMonteiro25/genesis-bank/assets/98993736/86fa6443-0b80-491f-bf4e-44d1c136dc08)
