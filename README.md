@@ -76,5 +76,8 @@ Back-end:
 
 Front-end:
 - styled-components
-
+- material UI: @mui/material, @emotion/react, @emotion/styled, @mui/icons-material
+- react-toastify
+- react-router-dom
+- axios
 
