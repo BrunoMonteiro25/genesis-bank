@@ -2,6 +2,8 @@
 
 ### Feito com: ReactJS, Styled Components, Material UI, NodeJS(Express) e MongoDB
 
+##
+
 ### Para testar o projeto:
 
 Requisitos prévios:
@@ -14,6 +16,8 @@ Requisitos prévios:
 ```
 git clone https://github.com/BrunoMonteiro25/genesis-bank.git
 ```
+
+## 
 
 ### Back-end - NodeJS(Express) e MongoDB
 
@@ -45,6 +49,8 @@ node src/index.js
 http://localhost:8000/livros
 ```
 
+##
+
 ### Front-end - ReactJS, Styled Components, Material UI
 
 1. Instalar as dependências:
@@ -66,6 +72,14 @@ npm start
 ```
 http://localhost:3000/
 ```
+
+##
+
+### Funcionalidades
+- Listagem de livros
+- Adicionar um novo livro
+- Visualizar detalhes de um livro
+- Remover um livro
 
 ### Dependências
 Back-end:
