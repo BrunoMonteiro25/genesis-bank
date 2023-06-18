@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   max-width: 40rem;
-  margin: 50px auto 0 auto;
+  margin: 10px auto 0 auto;
   overflow-x: hidden;
 `
 
@@ -79,6 +79,18 @@ export const Form = styled.form`
 
     @media screen and (max-width: 615px) {
       width: 380px;
+    }
+
+    @media screen and (max-width: 505px) {
+      width: 290px;
+    }
+
+    @media screen and (max-width: 410px) {
+      width: 220px;
+    }
+
+    @media screen and (max-width: 345px) {
+      width: 188px;
     }
   }
 
@@ -165,5 +177,17 @@ export const TextArea = styled.textarea`
 
   @media screen and (max-width: 615px) {
     width: 380px;
+  }
+
+  @media screen and (max-width: 505px) {
+    width: 290px;
+  }
+
+  @media screen and (max-width: 410px) {
+    width: 220px;
+  }
+
+  @media screen and (max-width: 345px) {
+    width: 188px;
   }
 `

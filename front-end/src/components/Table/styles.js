@@ -35,6 +35,11 @@ export const HeaderTable = styled.div`
       background-color: #0e870b;
     }
   }
+
+  @media screen and (max-width: 485px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `
 
 export const Acoes = styled.div`
