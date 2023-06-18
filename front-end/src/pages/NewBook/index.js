@@ -84,6 +84,21 @@ const NewBook = () => {
     }
   }
 
+  function handleTituloChange(event) {
+    setTitulo(event.target.value)
+    setTituloError('')
+  }
+
+  function handleAutorChange(event) {
+    setAutor(event.target.value)
+    setAutorError('')
+  }
+
+  function handleDescricaoChange(event) {
+    setDescricao(event.target.value)
+    setDescricaoError('')
+  }
+
   return (
     <Container>
       <Content>
@@ -104,7 +119,7 @@ const NewBook = () => {
             placeholder="Titulo do livro"
             className="input"
             value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
+            onChange={handleTituloChange}
           />
           {tituloError && <p style={{ color: '#f1341b' }}>{tituloError}</p>}
 
@@ -114,7 +129,7 @@ const NewBook = () => {
             placeholder="Nome do autor"
             className="input"
             value={autor}
-            onChange={(e) => setAutor(e.target.value)}
+            onChange={handleAutorChange}
           />
           {autorError && <p style={{ color: '#f1341b' }}>{autorError}</p>}
 
@@ -122,7 +137,7 @@ const NewBook = () => {
           <TextArea
             placeholder="Descrição do livro..."
             value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
+            onChange={handleDescricaoChange}
           />
           {descricaoError && (
             <p style={{ color: '#f1341b' }}>{descricaoError}</p>
